@@ -1,0 +1,15 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/isotope-product-list/languages/en/default.php" source-language="en" target-language="de">
+    <body>
+      <trans-unit id="CTE.isotope">
+        <source>Isotope eCommerce</source>
+      </trans-unit>
+      <trans-unit id="CTE.isotope_productList.0">
+        <source>Product list</source>
+      </trans-unit>
+      <trans-unit id="CTE.isotope_productList.1">
+        <source>Select products for the content element.</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

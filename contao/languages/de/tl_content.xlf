@@ -1,0 +1,22 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="system/modules/isotope-product-list/languages/en/tl_content.php" source-language="en" target-language="de">
+    <body>
+      <trans-unit id="tl_content.iso_products.0">
+        <source>Select product</source>
+        <target>Produkt auswählen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.iso_products.1">
+        <source>Select product who list in the product list.</source>
+        <target>Hier können Sie die Produkte auswählen die Sie in der Liste anzeigen möchten.</target>
+      </trans-unit>
+      <trans-unit id="tl_content.config_legend">
+        <source>Configuration settings</source>
+        <target>Konfiguration-Einstellungen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.template_legend">
+        <source>Template settings</source>
+        <target>Template-Einstellungen</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
