@@ -57,6 +57,28 @@ class ProductList extends ContentElement
             $template->id    = $this->id;
             $template->link  = $this->name;
 
+            $products = unserialize($this->iso_products);
+            if (empty($products)) {
+                return $template->parse();
+            }
+
+            $database       = Database::getInstance();
+            $productsResult = $database->prepare(
+                'SELECT * FROM tl_iso_product WHERE id IN (' . implode(',', $products) . ')
+                ORDER BY FIELD(id, ' . implode(',', $products) . ')'
+            )->execute();
+
+            while ($productsResult->next()) {
+                $productRow = $productsResult->row();
+
+                $template->wildcard .= sprintf(
+                    '<div class="tl_gray">%s (ID: %s) (SKU: %s)</div>',
+                    $productRow['name'],
+                    $productRow['id'],
+                    $productRow['sku']
+                );
+            }
+
             return $template->parse();
         }
 
