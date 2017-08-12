@@ -40,7 +40,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields'] = array_merge(
                 'searchLimit' => 9999,
                 'tl_class'    => 'clr',
                 'class'       => 'checkbox',
-                'data'        => 'ContaoBlackForest\Isotope\ProductList\SelectRiFactory\IsotopeProductFactory',
+                'data'        => 'ContaoBlackForest\Isotope\ProductList\SelectRi\IsotopeProductFactory'
             ),
             'sql'       => "blob NULL"
         ),

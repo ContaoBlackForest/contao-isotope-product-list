@@ -15,9 +15,10 @@
  * @filesource
  */
 
-namespace ContaoBlackForest\Isotope\ProductList\SelectRiFactory;
+namespace ContaoBlackForest\Isotope\ProductList\SelectRi;
 
 use Hofff\Contao\Selectri\Exception\SelectriException;
+use Hofff\Contao\Selectri\Model\Flat\SQLListData;
 use Hofff\Contao\Selectri\Model\Flat\SQLListDataConfig;
 use Hofff\Contao\Selectri\Model\Flat\SQLListDataFactory;
 use Hofff\Contao\Selectri\Util\LabelFormatter;
@@ -45,7 +46,10 @@ class IsotopeProductFactory extends SQLListDataFactory
 
         $widget->setDisableBrowsing(true);
 
-        return parent::createData($widget);
+        $config = clone $this->getConfig();
+        $this->prepareConfig($config);
+
+        return new IsotopeProductListData($widget, $this->getDatabase(), $config);
     }
 
     /**
@@ -64,7 +68,8 @@ class IsotopeProductFactory extends SQLListDataFactory
         $labelFormatter->setFields(['name', 'id', 'sku']);
         $config->setLabelCallback([$labelFormatter, 'format']);
 
-        $config->setSearchColumns(['name', 'sku']);
+        $config->setSearchColumns(['name', 'sku', 'alias']);
+        $config->setConditionExpr('pid=0 AND language=\'\'');
 
         parent::prepareConfig($config);
     }
