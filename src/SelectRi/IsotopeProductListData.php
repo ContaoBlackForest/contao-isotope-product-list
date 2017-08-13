@@ -19,6 +19,7 @@ namespace ContaoBlackForest\Isotope\ProductList\SelectRi;
 
 
 use Hofff\Contao\Selectri\Model\Flat\SQLListData;
+use Hofff\Contao\Selectri\Util\SearchUtil;
 
 /**
  * This class if for list the isotope products.
@@ -28,14 +29,15 @@ class IsotopeProductListData extends SQLListData
     /**
      * {@inheritDoc}
      */
-    protected function buildSearchExpr($keywordCnt, &$columnCnt) {
-        $columns = $this->cfg->getSearchColumns();
+    protected function buildSearchExpr($keywordCnt, &$columnCnt)
+    {
+        $columns   = $this->cfg->getSearchColumns();
         $keyColumn = $this->cfg->getKeyColumn();
         in_array($keyColumn, $columns) || $columns[] = $keyColumn;
 
         $condition = array();
-        foreach($columns as $column) {
-            if ('id' === $column){
+        foreach ($columns as $column) {
+            if ('id' === $column) {
                 continue;
             }
 
@@ -45,5 +47,39 @@ class IsotopeProductListData extends SQLListData
 
         $columnCnt = count($columns);
         return '(' . implode(') AND (', array_fill(0, $keywordCnt, $condition)) . ')';
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function search($search, $limit, $offset = 0)
+    {
+        $keywords = SearchUtil::parseKeywords($search);
+        if (!$keywords) {
+            return new \EmptyIterator;
+        }
+
+        // Improved search alias.
+        $aliasKeyword = implode('-', $keywords);
+        if ($search === $aliasKeyword) {
+            $keywords = [$aliasKeyword];
+        }
+
+        $columnCount = null;
+
+        $query = sprintf(
+            $this->buildNodeQuery(),
+            $this->buildSearchExpr(count($keywords), $columnCount)
+        );
+
+        $parameters = array();
+        foreach ($keywords as $keyword) {
+            $parameters[] = array_fill(0, $columnCount, $keyword);
+        }
+        $parameters = call_user_func_array('array_merge', $parameters);
+
+        $primaryKeys = $this->db->prepare($query)->limit($limit, $offset)->execute($parameters)->fetchEach('_key');
+
+        return $this->getNodes($primaryKeys);
     }
 }
