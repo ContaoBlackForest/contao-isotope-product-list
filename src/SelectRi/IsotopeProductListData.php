@@ -82,4 +82,35 @@ class IsotopeProductListData extends SQLListData
 
         return $this->getNodes($primaryKeys);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function buildNodeQuery()
+    {
+        $widget        = $this->getWidget();
+        $dataContainer = $widget->dataContainer;
+        $activeRecord  = $dataContainer->activeRecord;
+
+        // Handle product filter for search result, to list with variants or translated products.
+        if ($activeRecord->iso_displayVariants
+            && $activeRecord->iso_displayTranslated) {
+            return parent::buildNodeQuery();
+        }
+
+        $conditionExpression = array();
+        // Search result without variants.
+        if (!$activeRecord->iso_displayVariants) {
+            $conditionExpression[] = 'pid=0';
+        }
+        // Search result without translated products.
+        if (!$activeRecord->iso_displayTranslated) {
+            $conditionExpression[] = 'language=\'\'';
+        }
+
+        $config = $this->getConfig();
+        $config->setConditionExpr(implode(' AND ', $conditionExpression));
+
+        return parent::buildNodeQuery();
+    }
 }

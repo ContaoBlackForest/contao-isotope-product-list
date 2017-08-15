@@ -21,7 +21,7 @@
  * Add palettes
  */
 $GLOBALS['TL_DCA']['tl_content']['palettes']['isotope_productList'] =
-    '{type_legend},type,headline;{include_legend},iso_products;{config_legend},iso_listingSortField,iso_listingSortDirection,iso_cols,iso_use_quantity,iso_buttons,iso_addProductJumpTo;{template_legend},customTpl,iso_gallery,iso_list_layout;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
+    '{type_legend},type,headline;{include_legend},iso_displayVariants,iso_displayTranslated,iso_products;{config_legend},iso_listingSortField,iso_listingSortDirection,iso_cols,iso_use_quantity,iso_buttons,iso_addProductJumpTo;{template_legend},customTpl,iso_gallery,iso_list_layout;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 
 /**
  * Add fields
@@ -29,6 +29,22 @@ $GLOBALS['TL_DCA']['tl_content']['palettes']['isotope_productList'] =
 $GLOBALS['TL_DCA']['tl_content']['fields'] = array_merge(
     $GLOBALS['TL_DCA']['tl_content']['fields'],
     array(
+        'iso_displayVariants'      => array
+        (
+            'label'     => &$GLOBALS['TL_LANG']['tl_content']['iso_displayVariants'],
+            'exclude'   => true,
+            'inputType' => 'checkbox',
+            'eval'      => array('tl_class' => 'w50 m12', 'submitOnChange' => true),
+            'sql'       => "char(1) NOT NULL default ''",
+        ),
+        'iso_displayTranslated'    => array
+        (
+            'label'     => &$GLOBALS['TL_LANG']['tl_content']['iso_displayTranslated'],
+            'exclude'   => true,
+            'inputType' => 'checkbox',
+            'eval'      => array('tl_class' => 'w50 m12', 'submitOnChange' => true),
+            'sql'       => "char(1) NOT NULL default ''",
+        ),
         'iso_products'             => array
         (
             'label'     => &$GLOBALS['TL_LANG']['tl_content']['iso_products'],
