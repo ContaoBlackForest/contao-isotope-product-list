@@ -18,7 +18,6 @@
 namespace ContaoBlackForest\Isotope\ProductList\SelectRi;
 
 use Hofff\Contao\Selectri\Exception\SelectriException;
-use Hofff\Contao\Selectri\Model\Flat\SQLListData;
 use Hofff\Contao\Selectri\Model\Flat\SQLListDataConfig;
 use Hofff\Contao\Selectri\Model\Flat\SQLListDataFactory;
 use Hofff\Contao\Selectri\Util\LabelFormatter;
@@ -61,6 +60,8 @@ class IsotopeProductFactory extends SQLListDataFactory
      */
     protected function prepareConfig(SQLListDataConfig $config)
     {
+        parent::prepareConfig($config);
+
         $config->setTable('tl_iso_product');
 
         $labelFormatter = new LabelFormatter();
@@ -69,7 +70,6 @@ class IsotopeProductFactory extends SQLListDataFactory
         $config->setLabelCallback([$labelFormatter, 'format']);
 
         $config->setSearchColumns(['name', 'sku', 'alias']);
-        $config->setConditionExpr('pid=0 AND language=\'\'');
 
         parent::prepareConfig($config);
     }
