@@ -1,6 +1,22 @@
 <?xml version="1.0" ?><xliff version="1.1">
   <file datatype="php" original="system/modules/isotope-product-list/languages/en/tl_content.php" source-language="en" target-language="de">
     <body>
+      <trans-unit id="tl_content.iso_displayVariants.0">
+        <source>Display variants</source>
+        <target>Varianten anzeigen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.iso_displayVariants.1">
+        <source>Display variants in the search result, for select the product variants in the output list.</source>
+        <target>Hier können Sie einstellen, daß in der Suche die Varianten mit aufgelistet werden. Diese Einstellung hat mit der Frontendausgabe nichts zu tun!</target>
+      </trans-unit>
+      <trans-unit id="tl_content.iso_displayTranslated.0">
+        <source>Display translated products</source>
+        <target>Übersetzte Produkte anzeigen</target>
+      </trans-unit>
+      <trans-unit id="tl_content.iso_displayTranslated.1">
+        <source>Display translated products in the search result, for select the translated products in the output list.</source>
+        <target>Hier können Sie einstellen, daß in der Suche die Übersetzten Produkte mit aufgelistet werden. Diese Einstellung hat mit der Frontendausgabe nichts zu tun!</target>
+      </trans-unit>
       <trans-unit id="tl_content.iso_products.0">
         <source>Select product</source>
         <target>Produkt auswählen</target>
